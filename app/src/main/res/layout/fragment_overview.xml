@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.OverviewFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -32,16 +33,16 @@
 
             <TextView
                 android:id="@+id/text_category"
-                android:textColor="@color/white"
-                android:textStyle="italic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="100dp"
-                tools:text="Entertainment"
-                android:textSize="22sp" />
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="italic"
+                tools:text="Entertainment" />
 
 
             <TextView
@@ -49,11 +50,9 @@
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
                 android:ellipsize="end"
                 android:gravity="start"
                 android:maxLines="2"
@@ -61,33 +60,39 @@
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="12"
-                tools:text="Once Upon A Time In Hollywood"
-                android:textSize="32sp" />
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                tools:text="Once Upon A Time In Hollywood" />
 
             <TextView
-                android:id="@+id/text_date"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_author"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="6dp"
-                android:textColor="#CAC6C6"
-                android:textSize="16sp"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxLines="1"
                 android:shadowColor="@color/black"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="1"
+                android:textColor="#CAC6C6"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="nov 1, 2022" />
+                tools:text="Rafael Miranda" />
+
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/overview_menu"
                 app:layout_collapseMode="pin"
+                app:menu="@menu/overview_menu"
                 app:navigationIcon="?attr/homeAsUpIndicator" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -97,7 +102,103 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/image_instagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_instagram"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/image_twitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_twitter"
+            app:layout_constraintStart_toEndOf="@id/image_instagram"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_email"
+            app:layout_constraintStart_toEndOf="@id/image_twitter"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintStart_toEndOf="@id/image_email"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:shadowColor="@color/black"
+            android:textColor="#736D6D"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="nov 1, 2022" />
+
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/image_twitter"
+            tools:layout_editor_absoluteX="25dp"
+            tools:text="Lorem ipsum dolor sit amet tincidunt, non tincidunt quam gravida. Suspendisse at felis rutrum, consequat lorem eget, luctus elit." />
+
+        <TextView
+            android:id="@+id/text_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/lato"
+            android:gravity="start"
+            android:maxLines="4"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_description"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sodales enim et metus tincidunt, non tincidunt quam gravida. Suspendisse at felis rutrum, consequat lorem eget, luctus elit. Donec interdum augue non varius cursus. Vestibulum sagittis, tortor ac tincidunt tincidunt, tortor enim cursus lacus, et venenatis urna eros sed lorem. Donec quam ante, suscipit vitae luctus id, scelerisque eget nibh. In mattis tortor vel urna dictum, vitae ultricies justo efficitur. Suspendisse a massa ac sem aliquam aliquam. Aenean nec magna nibh. Ut blandit, nunc a tristique facilisis, dui enim auctor tellus, sit amet luctus est elit nec ipsum. Donec ultrices auctor elit eget rhoncus. Mauris id massa dui." />
+
+
+        <Button
+            android:id="@+id/button_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Full News"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

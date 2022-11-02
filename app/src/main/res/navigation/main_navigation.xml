@@ -38,6 +38,9 @@
         <argument
             android:name="content"
             app:argType="string" />
+        <argument
+            android:name="author"
+            app:argType="string" />
 
     </fragment>
 

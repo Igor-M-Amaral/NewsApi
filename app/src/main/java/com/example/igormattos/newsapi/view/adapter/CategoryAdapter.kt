@@ -6,18 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.databinding.RowCategoryBinding
+import com.example.igormattos.newsapi.utils.NewsListener
 
 
 class CategoryAdapter : ListAdapter<Article, CategoryViewHolder>(NewsToCallBack()){
 
+    private lateinit var listener: NewsListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        return CategoryViewHolder(RowCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return CategoryViewHolder(RowCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false), listener)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val news = getItem(position)
         holder.bind(news)
+    }
+
+    fun attachListener(news: NewsListener){
+        listener = news
     }
 
     class NewsToCallBack: DiffUtil.ItemCallback<Article>(){

@@ -12,10 +12,12 @@ import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
+import com.example.igormattos.newsapi.utils.NewsListener
+import com.example.igormattos.newsapi.utils.UtilsMethods
 import com.example.igormattos.newsapi.view.HomeFragmentDirections
 import com.example.igormattos.newsapi.view.OverviewFragment
 
-class TrendingPagerAdapter(var context: Context, var articles: List<Article>) :  PagerAdapter() {
+class TrendingPagerAdapter(var context: Context, var articles: List<Article>, private val listener: NewsListener) :  PagerAdapter() {
 
     override fun getCount(): Int {
         return articles.size
@@ -41,16 +43,7 @@ class TrendingPagerAdapter(var context: Context, var articles: List<Article>) : 
 
 
         view.setOnClickListener {
-
-            val action = HomeFragmentDirections.actionHomeFragmentToOverviewFragment(
-                articles[position].description,
-                articles[position].title,
-                articles[position].urlToImage,
-                articles[position].url,
-                articles[position].publishedAt,
-                articles[position].content
-            )
-            findNavController(view).navigate(action)
+            listener.onListClick(articles[position])
         }
 
         container.addView(view)

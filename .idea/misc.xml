@@ -6,11 +6,13 @@
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/drawable/bg_chip_state_list.xml" value="0.1" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/drawable/ic_bookmark.xml" value="0.209" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/drawable/ic_favorite.xml" value="0.209" />
+        <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/drawable/rounded_top_border.xml" value="0.32" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/drawable/searchview_backgound.xml" value="0.3675" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/drawable/shape.xml" value="0.238" />
+        <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout-v28/fragment_overview.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout/chip_choice.xml" value="0.22314814814814815" />
-        <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout/fragment_overview.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout/fragment_overview.xml" value="0.33" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout/home_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout/item_pager_news.xml" value="0.47928994082840237" />
         <entry key="..\:/Users/Igor/Desktop/NewsApi/app/src/main/res/layout/main_screen.xml" value="0.3" />

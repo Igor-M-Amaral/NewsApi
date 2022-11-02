@@ -9,6 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_settings"
+            app:titleTextColor="@color/black"
+            app:titleCentered="true"
+            app:title="Discover" />
+
         <LinearLayout
             android:id="@+id/search"
             android:layout_width="match_parent"
@@ -17,7 +30,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <SearchView
                 android:id="@+id/searchView"
@@ -82,11 +95,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 app:selectionRequired="true"
-                app:checkedChip="@+id/chip2"
+                app:checkedChip="@+id/chip_sports"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip2"
+                    android:id="@+id/chip_sports"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
@@ -98,7 +111,7 @@
                     app:chipIconSize="12dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip3"
+                    android:id="@+id/chip_entertainement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
@@ -111,7 +124,7 @@
                     app:chipIconSize="12dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip4"
+                    android:id="@+id/chip_health"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
@@ -124,7 +137,7 @@
                     app:chipIconSize="12dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip5"
+                    android:id="@+id/chip_science"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
@@ -137,7 +150,7 @@
                     app:chipIconSize="12dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip6"
+                    android:id="@+id/chip_business"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
@@ -150,7 +163,7 @@
                     app:chipIconSize="12dp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip7"
+                    android:id="@+id/chip_technology"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
