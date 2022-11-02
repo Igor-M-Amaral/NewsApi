@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.igormattos.newsapi.view.HomeFragment"
+        tools:layout="@layout/home_fragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.example.igormattos.newsapi.view.OverviewFragment"
+        tools:layout="@layout/fragment_overview"
+        android:label="OverviewFragment">
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="url_content"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="content"
+            app:argType="string" />
+
+    </fragment>
+
+
+</navigation>
