@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 app:selectionRequired="true"
-                app:checkedChip="@+id/chip_sports"
+
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
@@ -115,7 +115,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:clickable="true"
                     android:focusable="true"
                     android:text="Entertainment"
                     android:textColor="#CAC6C6"
@@ -128,7 +127,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:clickable="true"
                     android:focusable="true"
                     android:text="Health"
                     android:textColor="#CAC6C6"
@@ -141,7 +139,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:clickable="true"
                     android:focusable="true"
                     android:text="Science"
                     android:textColor="#CAC6C6"
@@ -154,7 +151,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:clickable="true"
                     android:focusable="true"
                     android:text="Business"
                     android:textColor="#CAC6C6"
@@ -167,7 +163,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:clickable="true"
                     android:focusable="true"
                     android:text="Technology"
                     android:textColor="#CAC6C6"

@@ -9,17 +9,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.databinding.HomeFragmentBinding
 import com.example.igormattos.newsapi.utils.NewsListener
 import com.example.igormattos.newsapi.utils.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import com.example.igormattos.newsapi.view.adapter.TrendingPagerAdapter
+import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment(), View.OnClickListener {
+
+class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeFragmentBinding
     private val viewModel: ListViewModel by viewModel()
@@ -34,6 +35,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding = HomeFragmentBinding.inflate(layoutInflater)
 
         viewModel.load("sport")
+
 
         val listener = object : NewsListener {
             override fun onListClick(bundle: Article) {
@@ -54,47 +56,41 @@ class HomeFragment : Fragment(), View.OnClickListener {
         adapterCategory.attachListener(listener)
 
         binding.apply {
-            chipSports.setOnClickListener(this@HomeFragment)
-            chipBusiness.setOnClickListener(this@HomeFragment)
-            chipEntertainement.setOnClickListener(this@HomeFragment)
-            chipHealth.setOnClickListener(this@HomeFragment)
-            chipScience.setOnClickListener(this@HomeFragment)
-            chipTechnology.setOnClickListener(this@HomeFragment)
 
-           homeViewPager.clipToPadding = false
+            chipSports.setOnCheckedChangeListener { compoundButton, b ->
+                viewModel.load("sport")
+            }
+
+            chipBusiness.setOnCheckedChangeListener { compoundButton, b ->
+                viewModel.load("business")
+            }
+
+            chipEntertainement.setOnCheckedChangeListener { _, b ->
+                viewModel.load("entertainment")
+            }
+            chipHealth.setOnCheckedChangeListener { _, _ ->
+                viewModel.load("health")
+            }
+
+            chipTechnology.setOnCheckedChangeListener { _, _ ->
+                viewModel.load("technology")
+            }
+
+            chipScience.setOnCheckedChangeListener { _, _ ->
+                viewModel.load("science")
+            }
+
+            homeViewPager.clipToPadding = false
             homeViewPager.setPadding(0, 0, 250, 0)
             homeViewPager.pageMargin = 32
 
         }
-
 
         observer(listener)
 
         return binding.root
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.chip_sports -> {
-                viewModel.load("sport")
-            }
-            R.id.chip_entertainement -> {
-                viewModel.load("entertainment")
-            }
-            R.id.chip_health -> {
-                viewModel.load("health")
-            }
-            R.id.chip_science -> {
-                viewModel.load("science")
-            }
-            R.id.chip_business -> {
-                viewModel.load("business")
-            }
-            R.id.chip_technology -> {
-                viewModel.load("technology")
-            }
-        }
-    }
 
     override fun onResume() {
         super.onResume()
@@ -111,6 +107,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         })
     }
+
+
 
     private fun observer(listener: NewsListener) {
         viewModel.trendingNews.observe(viewLifecycleOwner, Observer {
