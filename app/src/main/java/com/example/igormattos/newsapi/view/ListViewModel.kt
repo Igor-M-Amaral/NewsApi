@@ -17,14 +17,29 @@ class ListViewModel(private val repository: NewsRepository) : ViewModel() {
     private val _trendingNews = MutableLiveData<NewsModel?>()
     val trendingNews: LiveData<NewsModel?> = _trendingNews
 
+    private val _searchNews = MutableLiveData<NewsModel?>()
+    val searchNews: LiveData<NewsModel?> = _searchNews
 
-    fun load(category: String){
+    val progressBar = MutableLiveData<Boolean>()
+
+
+    fun load(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val resultTrending = repository.getNews("general")
-           _trendingNews.postValue(resultTrending)
+            _trendingNews.postValue(resultTrending)
 
             val resultCategory = repository.getNews(category)
             _newsByCategory.postValue(resultCategory)
+
+        }
+    }
+
+    fun search(query: String) {
+        progressBar.postValue(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            val resultSearch = repository.getSearch(query)
+            _searchNews.postValue(resultSearch)
+            progressBar.postValue(false)
 
         }
     }

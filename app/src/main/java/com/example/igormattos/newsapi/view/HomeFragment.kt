@@ -1,28 +1,28 @@
 package com.example.igormattos.newsapi.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
-import com.example.igormattos.newsapi.databinding.HomeFragmentBinding
+import com.example.igormattos.newsapi.databinding.FragmentHomeBinding
 import com.example.igormattos.newsapi.utils.NewsListener
 import com.example.igormattos.newsapi.utils.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import com.example.igormattos.newsapi.view.adapter.TrendingPagerAdapter
-import com.google.android.material.chip.Chip
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
 
-    private lateinit var binding: HomeFragmentBinding
+    private lateinit var binding: FragmentHomeBinding
     private val viewModel: ListViewModel by viewModel()
     private var adapterCategory = CategoryAdapter()
 
@@ -32,10 +32,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = HomeFragmentBinding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
 
         viewModel.load("sport")
-
 
         val listener = object : NewsListener {
             override fun onListClick(bundle: Article) {
@@ -53,15 +52,17 @@ class HomeFragment : Fragment() {
             }
         }
 
+        binding.toolbar.menu.findItem(R.id.menu_search).setOnMenuItemClickListener(this)
+
         adapterCategory.attachListener(listener)
 
         binding.apply {
 
-            chipSports.setOnCheckedChangeListener { compoundButton, b ->
+            chipSports.setOnCheckedChangeListener { _, _ ->
                 viewModel.load("sport")
             }
 
-            chipBusiness.setOnCheckedChangeListener { compoundButton, b ->
+            chipBusiness.setOnCheckedChangeListener { _, _ ->
                 viewModel.load("business")
             }
 
@@ -85,11 +86,11 @@ class HomeFragment : Fragment() {
             homeViewPager.pageMargin = 32
 
         }
-
         observer(listener)
 
         return binding.root
     }
+
 
 
     override fun onResume() {
@@ -108,8 +109,6 @@ class HomeFragment : Fragment() {
         })
     }
 
-
-
     private fun observer(listener: NewsListener) {
         viewModel.trendingNews.observe(viewLifecycleOwner, Observer {
             lifecycleScope.launch {
@@ -120,6 +119,15 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onMenuItemClick(v: MenuItem): Boolean {
+        if (v.itemId == R.id.menu_search){
+            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+
+            findNavController().navigate(action)
+        }
+        return true
     }
 
 }

@@ -8,10 +8,24 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.igormattos.newsapi.view.HomeFragment"
-        tools:layout="@layout/home_fragment"
+        tools:layout="@layout/fragment_home"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.igormattos.newsapi.view.SearchFragment"
+        tools:layout="@layout/fragment_search"
+        android:label="Search">
+        <action
+            android:id="@+id/action_serachFragment_to_overviewFragment"
             app:destination="@id/overviewFragment" />
     </fragment>
 
@@ -44,8 +58,6 @@
 
     </fragment>
 
-    
-
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.igormattos.newsapi.view.ui.gallery.GalleryFragment"
@@ -57,4 +69,5 @@
         android:name="com.example.igormattos.newsapi.view.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
 </navigation>
