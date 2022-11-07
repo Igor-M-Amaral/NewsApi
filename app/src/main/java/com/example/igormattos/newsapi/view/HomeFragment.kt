@@ -10,11 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
+import com.example.igormattos.newsapi.data.model.NewsDB
 import com.example.igormattos.newsapi.databinding.FragmentHomeBinding
 import com.example.igormattos.newsapi.utils.NewsListener
 import com.example.igormattos.newsapi.utils.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import com.example.igormattos.newsapi.view.adapter.TrendingPagerAdapter
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,6 +27,9 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: ListViewModel by viewModel()
     private var adapterCategory = CategoryAdapter()
+    private lateinit var shimmerViewPager: ShimmerFrameLayout
+    private lateinit var shimmerViewCategory: ShimmerFrameLayout
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,14 +38,14 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
     ): View {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        shimmerViewPager = binding.shimmerViewPager
+        shimmerViewCategory = binding.shimmerViewContainer
 
-        viewModel.load("sport")
 
         val listener = object : NewsListener {
             override fun onListClick(bundle: Article) {
 
                 val action = HomeFragmentDirections.actionHomeFragmentToOverviewFragment(
-                    bundle.description ?: "unknown",
                     bundle.title ?: "unknown",
                     bundle.urlToImage ?: "unknown",
                     bundle.url ?: "unknown",
@@ -50,6 +55,8 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
                 )
                 findNavController().navigate(action)
             }
+
+            override fun onListClickFavorites(bundle: NewsDB) {}
         }
 
         binding.toolbar.menu.findItem(R.id.menu_search).setOnMenuItemClickListener(this)
@@ -60,25 +67,31 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
 
             chipSports.setOnCheckedChangeListener { _, _ ->
                 viewModel.load("sport")
+                textCategory.text = "Sport"
             }
 
             chipBusiness.setOnCheckedChangeListener { _, _ ->
                 viewModel.load("business")
+                textCategory.text = "Business"
             }
 
             chipEntertainement.setOnCheckedChangeListener { _, b ->
                 viewModel.load("entertainment")
+                textCategory.text = "Entertainment"
             }
             chipHealth.setOnCheckedChangeListener { _, _ ->
                 viewModel.load("health")
+                textCategory.text = "Health"
             }
 
             chipTechnology.setOnCheckedChangeListener { _, _ ->
                 viewModel.load("technology")
+                textCategory.text = "Technology"
             }
 
             chipScience.setOnCheckedChangeListener { _, _ ->
                 viewModel.load("science")
+                textCategory.text = "Science"
             }
 
             homeViewPager.clipToPadding = false
@@ -86,12 +99,11 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
             homeViewPager.pageMargin = 32
 
         }
+
         observer(listener)
 
         return binding.root
     }
-
-
 
     override fun onResume() {
         super.onResume()
@@ -104,9 +116,21 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
 
                 if (it != null) {
                     adapterCategory.submitList(it.articles)
+
+                    shimmerViewCategory.stopShimmer()
+                    shimmerViewCategory.visibility = View.GONE
                 }
             }
         })
+    }
+
+    override fun onMenuItemClick(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_search){
+            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+
+            findNavController().navigate(action)
+        }
+        return true
     }
 
     private fun observer(listener: NewsListener) {
@@ -116,18 +140,12 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
                 if (it != null) {
                     binding.homeViewPager.adapter =
                         TrendingPagerAdapter(requireActivity(), it.articles, listener)
+
+                    shimmerViewPager.stopShimmer()
+                    shimmerViewPager.visibility = View.GONE
                 }
             }
         })
-    }
-
-    override fun onMenuItemClick(v: MenuItem): Boolean {
-        if (v.itemId == R.id.menu_search){
-            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
-
-            findNavController().navigate(action)
-        }
-        return true
     }
 
 }

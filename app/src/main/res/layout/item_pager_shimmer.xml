@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:elevation="32dp"
     android:orientation="vertical">
@@ -17,30 +17,16 @@
         app:cardElevation="5dp">
 
         <ImageView
-            android:id="@+id/image_thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape" />
 
-        <TextView
-            android:id="@+id/text_title"
+        <ImageView
+            android:background="#CAC7C7"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_gravity="bottom"
-            android:layout_margin="8dp"
-            android:fontFamily="sans-serif-black"
-            android:ellipsize="end"
-            android:gravity="start"
-            android:maxLines="2"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            tools:text="NewsUp is platform where you can get all the latest news." />
+            android:layout_margin="8dp"/>
 
     </androidx.cardview.widget.CardView>
 

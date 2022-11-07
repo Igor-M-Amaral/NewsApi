@@ -1,8 +1,10 @@
 package com.example.igormattos.newsapi.data.di
 
 import com.example.igormattos.newsapi.data.api.NewApiService
+import com.example.igormattos.newsapi.data.local.FavoriteDataBase
 import com.example.igormattos.newsapi.data.repository.NewsRepository
 import com.example.igormattos.newsapi.utils.Constants
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -12,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object DataModule {
 
     fun load(){
-        loadKoinModules(networkModule() + newsModule())
+        loadKoinModules(networkModule() + newsModule() + daoModule())
     }
 
     private fun newsModule() : Module{
@@ -30,6 +32,12 @@ object DataModule {
                     .build()
                     .create(NewApiService::class.java)
             }
+        }
+    }
+
+    private fun daoModule(): Module {
+        return module {
+            single { FavoriteDataBase.getDataBase(androidContext()).getFavoriteDao() }
         }
     }
 

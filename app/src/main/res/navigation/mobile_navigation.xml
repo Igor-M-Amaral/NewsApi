@@ -35,19 +35,16 @@
         tools:layout="@layout/fragment_overview"
         android:label="OverviewFragment">
         <argument
-            android:name="description"
-            app:argType="string" />
-        <argument
             android:name="title"
             app:argType="string" />
         <argument
-            android:name="image"
+            android:name="urlToImage"
             app:argType="string" />
         <argument
-            android:name="url_content"
+            android:name="url"
             app:argType="string" />
         <argument
-            android:name="date"
+            android:name="publishedAt"
             app:argType="string" />
         <argument
             android:name="content"
@@ -59,10 +56,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.igormattos.newsapi.view.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_favorites"
+        android:name="com.example.igormattos.newsapi.view.FavoriteFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" >
+
+        <action
+            android:id="@+id/action_nav_favorites_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_slideshow"

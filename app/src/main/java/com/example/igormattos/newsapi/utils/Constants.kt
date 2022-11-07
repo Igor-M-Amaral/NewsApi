@@ -17,4 +17,8 @@ class Constants private constructor() {
         const val sortBy = "popularity"
         const val country = "country=br"
     }
+
+    object TABLE{
+        const val NAME = "FAVORITE"
+    }
 }

@@ -14,11 +14,13 @@
         android:fitsSystemWindows="true"
         android:theme="@style/Theme.Design">
 
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="noScroll">
+
 
             <ImageView
                 android:id="@+id/image_thumbnail"
@@ -30,6 +32,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
+
+            <ImageView
+                android:id="@+id/image_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_favorite"/>
 
             <TextView
                 android:id="@+id/text_category"
@@ -89,10 +99,8 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
+                android:layout_width="50dp"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:menu="@menu/overview_menu"
                 app:navigationIcon="?attr/homeAsUpIndicator" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -101,6 +109,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <ImageView
             android:id="@+id/image_instagram"
@@ -154,7 +163,7 @@
 
 
         <TextView
-            android:id="@+id/text_description"
+            android:id="@+id/text_full_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
@@ -182,7 +191,7 @@
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_description"
+            app:layout_constraintTop_toBottomOf="@+id/text_full_title"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sodales enim et metus tincidunt, non tincidunt quam gravida. Suspendisse at felis rutrum, consequat lorem eget, luctus elit. Donec interdum augue non varius cursus. Vestibulum sagittis, tortor ac tincidunt tincidunt, tortor enim cursus lacus, et venenatis urna eros sed lorem. Donec quam ante, suscipit vitae luctus id, scelerisque eget nibh. In mattis tortor vel urna dictum, vitae ultricies justo efficitur. Suspendisse a massa ac sem aliquam aliquam. Aenean nec magna nibh. Ut blandit, nunc a tristique facilisis, dui enim auctor tellus, sit amet luctus est elit nec ipsum. Donec ultrices auctor elit eget rhoncus. Mauris id massa dui." />
 
 

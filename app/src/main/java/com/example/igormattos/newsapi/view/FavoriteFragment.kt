@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -13,41 +11,35 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.data.model.NewsDB
-import com.example.igormattos.newsapi.databinding.FragmentHomeBinding
+import com.example.igormattos.newsapi.databinding.FragmentFavoritesBinding
 import com.example.igormattos.newsapi.databinding.FragmentSearchBinding
 import com.example.igormattos.newsapi.utils.NewsListener
 import com.example.igormattos.newsapi.utils.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
+import com.example.igormattos.newsapi.view.adapter.FavoriteNewsAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private lateinit var binding: FragmentSearchBinding
+    private lateinit var binding: FragmentFavoritesBinding
     private val viewModel: ListViewModel by viewModel()
-    private var adapterCategory = CategoryAdapter()
-
-    private val progressBar: ProgressBar by lazy {
-        binding.progressbar
-    }
-
+    private var adapterCategory = FavoriteNewsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
 
-        viewModel.progressBar.observe(viewLifecycleOwner, Observer {
-            if (it) showProgressBar() else (hideProgressBar())
-
-        })
+        binding = FragmentFavoritesBinding.inflate(layoutInflater)
 
         val listener = object : NewsListener {
-            override fun onListClick(bundle: Article) {
+            override fun onListClick(bundle: Article) {}
 
-                val action = SearchFragmentDirections.actionSerachFragmentToOverviewFragment(
+            override fun onListClickFavorites(bundle: NewsDB) {
+
+                val action = FavoriteFragmentDirections.actionNavFavoritesToOverviewFragment(
                     bundle.title ?: "unknown",
                     bundle.urlToImage ?: "unknown",
                     bundle.url ?: "unknown",
@@ -57,58 +49,26 @@ class SearchFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             }
-
-            override fun onListClickFavorites(bundle: NewsDB) {}
         }
 
-
-        initSearchBar()
+        viewModel.listFavorites()
 
         adapterCategory.attachListener(listener)
 
         return binding.root
     }
 
-
     override fun onResume() {
         super.onResume()
-        viewModel.searchNews.observe(viewLifecycleOwner, Observer {
+        viewModel.newsDB.observe(viewLifecycleOwner, Observer {
             lifecycleScope.launch {
-
                 binding.recyclerviewCategory.layoutManager =
                     LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
                 binding.recyclerviewCategory.adapter = adapterCategory
 
-                if (it != null) {
-                    adapterCategory.submitList(it.articles)
-                }
+                adapterCategory.submitList(it)
+
             }
         })
-    }
-
-    private fun initSearchBar() {
-
-        val searchView = binding.searchView
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                val searchString = searchView.query.toString()
-                viewModel.search(searchString)
-                searchView.clearFocus()
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
-    }
-
-    private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
-    }
-
-    private fun hideProgressBar() {
-        progressBar.visibility = View.GONE
     }
 }
