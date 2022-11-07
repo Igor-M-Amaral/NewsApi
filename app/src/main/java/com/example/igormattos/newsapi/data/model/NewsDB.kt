@@ -2,7 +2,7 @@ package com.example.igormattos.newsapi.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.igormattos.newsapi.utils.Constants
+import com.example.igormattos.newsapi.utils.Constants.Constants
 
 @Entity(tableName = Constants.TABLE.NAME)
 data class NewsDB(

@@ -1,21 +1,16 @@
 package com.example.igormattos.newsapi.view.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.Navigation.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
-import com.example.igormattos.newsapi.utils.NewsListener
-import com.example.igormattos.newsapi.utils.UtilsMethods
-import com.example.igormattos.newsapi.view.HomeFragmentDirections
-import com.example.igormattos.newsapi.view.OverviewFragment
+import com.example.igormattos.newsapi.utils.listener.NewsListener
 
 class TrendingPagerAdapter(var context: Context, var articles: List<Article>, private val listener: NewsListener) :  PagerAdapter() {
 

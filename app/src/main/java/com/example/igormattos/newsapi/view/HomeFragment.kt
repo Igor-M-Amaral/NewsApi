@@ -2,7 +2,6 @@ package com.example.igormattos.newsapi.view
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -12,12 +11,11 @@ import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.data.model.NewsDB
 import com.example.igormattos.newsapi.databinding.FragmentHomeBinding
-import com.example.igormattos.newsapi.utils.NewsListener
-import com.example.igormattos.newsapi.utils.UtilsMethods
+import com.example.igormattos.newsapi.utils.listener.NewsListener
+import com.example.igormattos.newsapi.utils.methods.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import com.example.igormattos.newsapi.view.adapter.TrendingPagerAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,7 +54,6 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
                 findNavController().navigate(action)
             }
 
-            override fun onListClickFavorites(bundle: NewsDB) {}
         }
 
         binding.toolbar.menu.findItem(R.id.menu_search).setOnMenuItemClickListener(this)

@@ -1,4 +1,4 @@
-package com.example.igormattos.newsapi.utils
+package com.example.igormattos.newsapi.utils.methods
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

@@ -1,4 +1,4 @@
-package com.example.igormattos.newsapi.utils
+package com.example.igormattos.newsapi.utils.Constants
 
 class Constants private constructor() {
 

@@ -6,16 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.igormattos.newsapi.data.model.Article
+import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.NewsDB
 import com.example.igormattos.newsapi.databinding.FragmentFavoritesBinding
-import com.example.igormattos.newsapi.databinding.FragmentSearchBinding
-import com.example.igormattos.newsapi.utils.NewsListener
-import com.example.igormattos.newsapi.utils.UtilsMethods
-import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
+import com.example.igormattos.newsapi.utils.listener.FavoritesListener
+import com.example.igormattos.newsapi.utils.methods.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.FavoriteNewsAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,7 +23,9 @@ class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoritesBinding
     private val viewModel: ListViewModel by viewModel()
-    private var adapterCategory = FavoriteNewsAdapter()
+    private val adapterCategory = FavoriteNewsAdapter()
+
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +35,11 @@ class FavoriteFragment : Fragment() {
 
         binding = FragmentFavoritesBinding.inflate(layoutInflater)
 
-        val listener = object : NewsListener {
-            override fun onListClick(bundle: Article) {}
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        val listener = object : FavoritesListener {
 
             override fun onListClickFavorites(bundle: NewsDB) {
 
@@ -49,9 +53,14 @@ class FavoriteFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             }
-        }
 
-        viewModel.listFavorites()
+            override fun onDeleteByTitle(newsDB: NewsDB) {
+                viewModel.deleteFavorite(newsDB)
+                onResume()
+            }
+
+        }
+        initSearchBar()
 
         adapterCategory.attachListener(listener)
 
@@ -60,6 +69,8 @@ class FavoriteFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        viewModel.listFavorites()
+
         viewModel.newsDB.observe(viewLifecycleOwner, Observer {
             lifecycleScope.launch {
                 binding.recyclerviewCategory.layoutManager =
@@ -70,5 +81,36 @@ class FavoriteFragment : Fragment() {
 
             }
         })
+    }
+
+    private fun initSearchBar() {
+        with(binding.toolbar) {
+            this.inflateMenu(R.menu.search_menu)
+
+            val searchItem = menu.findItem(R.id.menu_search)
+
+            searchView = searchItem.actionView as SearchView
+
+
+            searchView.isIconified = false
+
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    val searchString = searchView.query.toString()
+                    viewModel.searchFromDB(searchString)
+                    searchView.clearFocus()
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.let {
+
+                        viewModel.searchFromDB(it)
+                    }
+                    return true
+                }
+            })
+        }
+
     }
 }

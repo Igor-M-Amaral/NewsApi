@@ -12,11 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.igormattos.newsapi.data.model.Article
-import com.example.igormattos.newsapi.data.model.NewsDB
-import com.example.igormattos.newsapi.databinding.FragmentHomeBinding
 import com.example.igormattos.newsapi.databinding.FragmentSearchBinding
-import com.example.igormattos.newsapi.utils.NewsListener
-import com.example.igormattos.newsapi.utils.UtilsMethods
+import com.example.igormattos.newsapi.utils.listener.NewsListener
+import com.example.igormattos.newsapi.utils.methods.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,6 +37,10 @@ class SearchFragment : Fragment() {
     ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater)
 
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
         viewModel.progressBar.observe(viewLifecycleOwner, Observer {
             if (it) showProgressBar() else (hideProgressBar())
 
@@ -57,8 +59,6 @@ class SearchFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             }
-
-            override fun onListClickFavorites(bundle: NewsDB) {}
         }
 
 
@@ -72,7 +72,7 @@ class SearchFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.searchNews.observe(viewLifecycleOwner, Observer {
+        viewModel.searchFromAPI.observe(viewLifecycleOwner, Observer {
             lifecycleScope.launch {
 
                 binding.recyclerviewCategory.layoutManager =
@@ -93,7 +93,7 @@ class SearchFragment : Fragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val searchString = searchView.query.toString()
-                viewModel.search(searchString)
+                viewModel.searchFromApi(searchString)
                 searchView.clearFocus()
                 return true
             }

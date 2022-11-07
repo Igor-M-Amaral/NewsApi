@@ -5,8 +5,8 @@ import com.bumptech.glide.Glide
 import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.databinding.ItemCategoryBinding
-import com.example.igormattos.newsapi.utils.NewsListener
-import com.example.igormattos.newsapi.utils.UtilsMethods
+import com.example.igormattos.newsapi.utils.listener.NewsListener
+import com.example.igormattos.newsapi.utils.methods.UtilsMethods
 
 class CategoryViewHolder(private val binding: ItemCategoryBinding, private val listener: NewsListener) : RecyclerView.ViewHolder(binding.root) {
     fun bind(news: Article) {

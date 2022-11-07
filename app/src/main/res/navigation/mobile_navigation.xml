@@ -67,7 +67,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_share"
         android:name="com.example.igormattos.newsapi.view.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />

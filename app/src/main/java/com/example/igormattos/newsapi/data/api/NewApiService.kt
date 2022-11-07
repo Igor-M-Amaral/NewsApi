@@ -1,10 +1,9 @@
 package com.example.igormattos.newsapi.data.api
 
 import com.example.igormattos.newsapi.data.model.NewsModel
-import com.example.igormattos.newsapi.utils.Constants
+import com.example.igormattos.newsapi.utils.Constants.Constants
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NewApiService {

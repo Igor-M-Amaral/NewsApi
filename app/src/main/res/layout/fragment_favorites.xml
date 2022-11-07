@@ -14,7 +14,7 @@
         android:background="@color/white"
         app:navigationIcon="?homeAsUpIndicator"
         app:navigationIconTint="@color/black"
-        app:title="Discover"
+        app:title="Favorites"
         app:titleCentered="true"
         app:titleTextColor="@color/black" />
 

@@ -2,7 +2,7 @@ package com.example.igormattos.newsapi.data.repository
 
 import com.example.igormattos.newsapi.data.api.NewApiService
 import com.example.igormattos.newsapi.data.model.NewsModel
-import com.example.igormattos.newsapi.utils.Constants
+import com.example.igormattos.newsapi.utils.Constants.Constants
 
 class NewsRepository(private val service: NewApiService) {
 

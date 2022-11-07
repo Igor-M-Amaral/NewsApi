@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.databinding.ItemCategoryBinding
-import com.example.igormattos.newsapi.utils.NewsListener
+import com.example.igormattos.newsapi.utils.listener.NewsListener
 
 
 class CategoryAdapter : ListAdapter<Article, CategoryViewHolder>(NewsToCallBack()){

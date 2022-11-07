@@ -3,7 +3,7 @@ package com.example.igormattos.newsapi.data.di
 import com.example.igormattos.newsapi.data.api.NewApiService
 import com.example.igormattos.newsapi.data.local.FavoriteDataBase
 import com.example.igormattos.newsapi.data.repository.NewsRepository
-import com.example.igormattos.newsapi.utils.Constants
+import com.example.igormattos.newsapi.utils.Constants.Constants
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module

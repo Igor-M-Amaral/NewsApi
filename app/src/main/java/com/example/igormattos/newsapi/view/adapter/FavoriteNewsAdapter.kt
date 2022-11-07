@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.igormattos.newsapi.data.model.NewsDB
-import com.example.igormattos.newsapi.databinding.ItemCategoryBinding
 import com.example.igormattos.newsapi.databinding.ItemPagerNewsBinding
-import com.example.igormattos.newsapi.utils.NewsListener
+import com.example.igormattos.newsapi.utils.listener.FavoritesListener
 
 class FavoriteNewsAdapter : ListAdapter<NewsDB, FavoriteViewHolder>(NewsDBToCallBack()) {
 
-    private lateinit var listener: NewsListener
+    private lateinit var listener: FavoritesListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder(ItemPagerNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false), listener)
@@ -22,7 +21,7 @@ class FavoriteNewsAdapter : ListAdapter<NewsDB, FavoriteViewHolder>(NewsDBToCall
         holder.bind(news)
     }
 
-    fun attachListener(favoriteListener: NewsListener){
+    fun attachListener(favoriteListener: FavoritesListener){
         listener = favoriteListener
     }
 
