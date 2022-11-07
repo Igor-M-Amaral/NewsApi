@@ -8,7 +8,7 @@ class Constants private constructor() {
     }
 
     object APIKEY {
-        const val KEY = "apiKey=36d84cdbd0664c3eb43aacee2c44b714"
+        const val KEY = "PUT YOUR API KEY HERE"
     }
 
     object SOURCES {
