@@ -18,7 +18,7 @@
   * [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
   * [Room](https://developer.android.com/topic/libraries/architecture/room) - SQLite object mapping library.
  
- * [Koin](https://insert-koin.io/) - Dependency Injection Framework (soon migrating to Hilt)
+ * [Dagger Hilt ](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency Injection Framework 
 
  * [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines) - A concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
   
