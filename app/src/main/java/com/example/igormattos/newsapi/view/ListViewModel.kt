@@ -9,10 +9,13 @@ import com.example.igormattos.newsapi.data.local.FavoriteDataBase
 import com.example.igormattos.newsapi.data.model.NewsDB
 import com.example.igormattos.newsapi.data.model.NewsModel
 import com.example.igormattos.newsapi.data.repository.NewsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ListViewModel(private val repository: NewsRepository, private val favoriteDao: FavoriteDao) :
+@HiltViewModel
+class ListViewModel @Inject constructor(private val repository: NewsRepository, private val favoriteDao: FavoriteDao) :
     ViewModel() {
 
     private val _newsByCategory = MutableLiveData<NewsModel?>()

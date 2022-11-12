@@ -3,27 +3,28 @@ package com.example.igormattos.newsapi.view
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
-import com.example.igormattos.newsapi.data.model.NewsDB
 import com.example.igormattos.newsapi.databinding.FragmentHomeBinding
 import com.example.igormattos.newsapi.utils.listener.NewsListener
 import com.example.igormattos.newsapi.utils.methods.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import com.example.igormattos.newsapi.view.adapter.TrendingPagerAdapter
 import com.facebook.shimmer.ShimmerFrameLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
 
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: ListViewModel by viewModel()
+    private val viewModel: ListViewModel by viewModels()
     private var adapterCategory = CategoryAdapter()
     private lateinit var shimmerViewPager: ShimmerFrameLayout
     private lateinit var shimmerViewCategory: ShimmerFrameLayout
@@ -38,6 +39,8 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         shimmerViewPager = binding.shimmerViewPager
         shimmerViewCategory = binding.shimmerViewContainer
+
+        viewModel.load("sport")
 
 
         val listener = object : NewsListener {

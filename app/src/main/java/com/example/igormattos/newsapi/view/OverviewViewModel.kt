@@ -1,15 +1,17 @@
-package com.example.igormattos.newsapi.view.ui
+package com.example.igormattos.newsapi.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.igormattos.newsapi.data.local.FavoriteDao
 import com.example.igormattos.newsapi.data.model.NewsDB
-import com.example.igormattos.newsapi.view.OverviewFragmentArgs
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class OverviewViewModel(private val favoriteDao: FavoriteDao) : ViewModel() {
+@HiltViewModel
+class OverviewViewModel @Inject constructor(private val favoriteDao: FavoriteDao) : ViewModel() {
 
 
     var favorite = MutableLiveData(false)

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,13 +17,14 @@ import com.example.igormattos.newsapi.databinding.FragmentSearchBinding
 import com.example.igormattos.newsapi.utils.listener.NewsListener
 import com.example.igormattos.newsapi.utils.methods.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-    private val viewModel: ListViewModel by viewModel()
+    private val viewModel: ListViewModel by viewModels()
     private var adapterCategory = CategoryAdapter()
 
     private val progressBar: ProgressBar by lazy {

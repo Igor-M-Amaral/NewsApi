@@ -3,8 +3,9 @@ package com.example.igormattos.newsapi.data.repository
 import com.example.igormattos.newsapi.data.api.NewApiService
 import com.example.igormattos.newsapi.data.model.NewsModel
 import com.example.igormattos.newsapi.utils.Constants.Constants
+import javax.inject.Inject
 
-class NewsRepository(private val service: NewApiService) {
+class NewsRepository @Inject constructor(private val service: NewApiService) {
 
     suspend fun getNews(category: String): NewsModel? {
         val response = service.getNews(category)
