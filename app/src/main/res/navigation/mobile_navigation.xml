@@ -12,25 +12,32 @@
         android:label="Home" >
         <action
             android:id="@+id/action_homeFragment_to_overviewFragment"
-            app:destination="@id/overviewFragment" />
+            app:destination="@id/nav_overview" />
 
-        <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/nav_search"
         android:name="com.example.igormattos.newsapi.view.fragments.SearchFragment"
-        tools:layout="@layout/fragment_search"
-        android:label="Search">
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
         <action
-            android:id="@+id/action_serachFragment_to_overviewFragment"
-            app:destination="@id/overviewFragment" />
+            android:id="@+id/action_nav_search_to_nav_overview"
+            app:destination="@id/nav_overview" />
     </fragment>
 
     <fragment
-        android:id="@+id/overviewFragment"
+        android:id="@+id/nav_favorites"
+        android:name="com.example.igormattos.newsapi.view.fragments.FavoriteFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_nav_favorites_to_overviewFragment"
+            app:destination="@id/nav_overview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_overview"
         android:name="com.example.igormattos.newsapi.view.fragments.OverviewFragment"
         tools:layout="@layout/fragment_overview"
         android:label="Overview">
@@ -55,21 +62,5 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_favorites"
-        android:name="com.example.igormattos.newsapi.view.fragments.FavoriteFragment"
-        android:label="Favorites"
-        tools:layout="@layout/fragment_favorites" >
-
-        <action
-            android:id="@+id/action_nav_favorites_to_overviewFragment"
-            app:destination="@id/overviewFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_search"
-        android:name="com.example.igormattos.newsapi.view.fragments.SearchFragment"
-        android:label="Search"
-        tools:layout="@layout/fragment_search"/>
 
 </navigation>

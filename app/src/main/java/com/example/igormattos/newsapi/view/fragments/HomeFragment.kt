@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.igormattos.newsapi.R
 import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.databinding.FragmentHomeBinding
 import com.example.igormattos.newsapi.utils.listener.NewsListener
@@ -21,7 +20,6 @@ import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -31,6 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var shimmerViewPager: ShimmerFrameLayout
     private lateinit var shimmerViewCategory: ShimmerFrameLayout
 
+    private var cont = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,17 +37,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
-
         binding = FragmentHomeBinding.inflate(layoutInflater)
         shimmerViewPager = binding.shimmerViewPager
         shimmerViewCategory = binding.shimmerViewContainer
 
-        viewModel.load("sport")
+        viewModel.loadGeneral()
 
         val listener = object : NewsListener {
             override fun onListClick(bundle: Article) {
-
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToOverviewFragment(
                         bundle.title ?: "unknown",
@@ -60,48 +56,31 @@ class HomeFragment : Fragment() {
                     )
                 findNavController().navigate(action)
             }
-
         }
 
         adapterCategory.attachListener(listener)
 
         binding.apply {
 
-            chipSports.setOnCheckedChangeListener { _, _ ->
-                viewModel.load("sport")
-                textCategory.text = "Sport"
+            //load default chip only once
+            if (cont == 0) {
+                val category = chipSport.text.toString()
+                viewModel.loadByCategory(category.lowercase())
+                textCategory.text = category.uppercase()
+                cont++
             }
 
-            chipBusiness.setOnCheckedChangeListener { _, _ ->
-                viewModel.load("business")
-                textCategory.text = "Business"
+            choiceChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+                for (id in checkedIds) {
+                    val chip: Chip = group.findViewById(id)
+                    viewModel.loadByCategory(chip.text.toString().lowercase())
+                    textCategory.text = chip.text.toString().uppercase()
+                }
             }
-
-            chipEntertainement.setOnCheckedChangeListener { _, b ->
-                viewModel.load("entertainment")
-                textCategory.text = "Entertainment"
-            }
-            chipHealth.setOnCheckedChangeListener { _, _ ->
-                viewModel.load("health")
-                textCategory.text = "Health"
-            }
-
-            chipTechnology.setOnCheckedChangeListener { _, _ ->
-                viewModel.load("technology")
-                textCategory.text = "Technology"
-            }
-
-            chipScience.setOnCheckedChangeListener { _, _ ->
-                viewModel.load("science")
-                textCategory.text = "Science"
-            }
-
             homeViewPager.clipToPadding = false
             homeViewPager.setPadding(0, 0, 250, 0)
             homeViewPager.pageMargin = 32
-
         }
-
         observer(listener)
 
         return binding.root
@@ -126,11 +105,9 @@ class HomeFragment : Fragment() {
         })
     }
 
-
     private fun observer(listener: NewsListener) {
         viewModel.trendingNews.observe(viewLifecycleOwner, Observer {
             lifecycleScope.launch {
-
                 if (it != null) {
                     binding.homeViewPager.adapter =
                         TrendingPagerAdapter(requireActivity(), it.articles, listener)

@@ -4,13 +4,12 @@ class Constants private constructor() {
 
     object URL {
         const val BASE_URL = "https://newsapi.org/v2/"
-
     }
 
     //add your api key here
     object APIKEY {
         // example "apiKey=b43aacee2c36d84cdbd0664ee2c44b71"
-        const val KEY = "Put your api key here"
+        const val KEY = "YOUR KEY :) "
     }
 
     object SOURCES {

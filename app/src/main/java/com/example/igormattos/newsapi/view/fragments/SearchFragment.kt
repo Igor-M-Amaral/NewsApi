@@ -49,7 +49,7 @@ class SearchFragment : Fragment() {
             override fun onListClick(bundle: Article) {
 
                 val action =
-                    SearchFragmentDirections.actionSerachFragmentToOverviewFragment(
+                    SearchFragmentDirections.actionNavSearchToNavOverview(
                         bundle.title ?: "unknown",
                         bundle.urlToImage ?: "unknown",
                         bundle.url ?: "unknown",

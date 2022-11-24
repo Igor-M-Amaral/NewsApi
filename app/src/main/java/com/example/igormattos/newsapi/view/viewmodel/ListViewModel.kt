@@ -27,23 +27,23 @@ class ListViewModel @Inject constructor(private val repository: NewsRepository, 
     private val _searchFromAPI = MutableLiveData<NewsModel?>()
     val searchFromAPI: LiveData<NewsModel?> = _searchFromAPI
 
-    private val _searchFromDB = MutableLiveData<List<NewsDB?>>()
-    val searchFromDB: LiveData<List<NewsDB?>> = _searchFromDB
-
     private val _newsDB = MutableLiveData<List<NewsDB>>()
     val newsDB: LiveData<List<NewsDB>> = _newsDB
 
     val progressBar = MutableLiveData<Boolean>()
 
 
-    fun load(category: String) {
+    fun loadByCategory(category: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val resultCategory = repository.getNews(category)
+            _newsByCategory.postValue(resultCategory)
+        }
+    }
+
+    fun loadGeneral(){
         viewModelScope.launch(Dispatchers.IO) {
             val resultTrending = repository.getNews("general")
             _trendingNews.postValue(resultTrending)
-
-            val resultCategory = repository.getNews(category)
-            _newsByCategory.postValue(resultCategory)
-
         }
     }
 
@@ -74,6 +74,7 @@ class ListViewModel @Inject constructor(private val repository: NewsRepository, 
             try {
                 _newsDB.postValue(favoriteDao.searchDataBase(searchString))
             } catch (e: NullPointerException) {
+                //TODO
             }
         }
     }

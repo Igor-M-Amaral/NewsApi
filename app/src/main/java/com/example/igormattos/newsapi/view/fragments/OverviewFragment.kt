@@ -38,12 +38,11 @@ class OverviewFragment : Fragment(), View.OnClickListener {
             findNavController().navigateUp()
         }
 
-
-
         setArgs(args)
         checkFavorite()
 
         binding.imageFavorite.setOnClickListener(this)
+
 
 
         return binding.root
