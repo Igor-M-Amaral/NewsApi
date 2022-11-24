@@ -6,24 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        app:navigationIcon="?homeAsUpIndicator"
-        app:navigationIconTint="@color/black"
-        app:title="Discover"
-        app:titleCentered="true"
-        app:titleTextColor="@color/black" />
-
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@id/toolbar"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/searchview_backgound"
@@ -48,7 +34,5 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:indeterminate="true"/>
-
-
 
 </RelativeLayout>

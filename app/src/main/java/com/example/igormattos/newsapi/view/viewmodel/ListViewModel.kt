@@ -1,4 +1,4 @@
-package com.example.igormattos.newsapi.view
+package com.example.igormattos.newsapi.view.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

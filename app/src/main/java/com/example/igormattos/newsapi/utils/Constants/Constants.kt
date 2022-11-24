@@ -7,8 +7,10 @@ class Constants private constructor() {
 
     }
 
+    //add your api key here
     object APIKEY {
-        const val KEY = "PUT YOUR API KEY HERE"
+        // example "apiKey=b43aacee2c36d84cdbd0664ee2c44b71"
+        const val KEY = "Put your api key here"
     }
 
     object SOURCES {

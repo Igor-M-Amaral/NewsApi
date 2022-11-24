@@ -1,4 +1,4 @@
-package com.example.igormattos.newsapi.view
+package com.example.igormattos.newsapi.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,7 @@ import com.example.igormattos.newsapi.data.model.Article
 import com.example.igormattos.newsapi.databinding.FragmentSearchBinding
 import com.example.igormattos.newsapi.utils.listener.NewsListener
 import com.example.igormattos.newsapi.utils.methods.UtilsMethods
+import com.example.igormattos.newsapi.view.viewmodel.ListViewModel
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -39,10 +40,6 @@ class SearchFragment : Fragment() {
     ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater)
 
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
-
         viewModel.progressBar.observe(viewLifecycleOwner, Observer {
             if (it) showProgressBar() else (hideProgressBar())
 
@@ -51,18 +48,18 @@ class SearchFragment : Fragment() {
         val listener = object : NewsListener {
             override fun onListClick(bundle: Article) {
 
-                val action = SearchFragmentDirections.actionSerachFragmentToOverviewFragment(
-                    bundle.title ?: "unknown",
-                    bundle.urlToImage ?: "unknown",
-                    bundle.url ?: "unknown",
-                    UtilsMethods.convertDate(bundle.publishedAt).toString() ?: "unknown",
-                    bundle.content ?: "unknown",
-                    bundle.author ?: "unknown"
-                )
+                val action =
+                    SearchFragmentDirections.actionSerachFragmentToOverviewFragment(
+                        bundle.title ?: "unknown",
+                        bundle.urlToImage ?: "unknown",
+                        bundle.url ?: "unknown",
+                        UtilsMethods.convertDate(bundle.publishedAt).toString() ?: "unknown",
+                        bundle.content ?: "unknown",
+                        bundle.author ?: "unknown"
+                    )
                 findNavController().navigate(action)
             }
         }
-
 
         initSearchBar()
 

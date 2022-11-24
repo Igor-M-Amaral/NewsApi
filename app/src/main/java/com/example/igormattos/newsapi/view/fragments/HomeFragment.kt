@@ -1,4 +1,4 @@
-package com.example.igormattos.newsapi.view
+package com.example.igormattos.newsapi.view.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -15,13 +15,15 @@ import com.example.igormattos.newsapi.utils.listener.NewsListener
 import com.example.igormattos.newsapi.utils.methods.UtilsMethods
 import com.example.igormattos.newsapi.view.adapter.CategoryAdapter
 import com.example.igormattos.newsapi.view.adapter.TrendingPagerAdapter
+import com.example.igormattos.newsapi.view.viewmodel.ListViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
+class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: ListViewModel by viewModels()
@@ -36,30 +38,30 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
         savedInstanceState: Bundle?
     ): View {
 
+
+
         binding = FragmentHomeBinding.inflate(layoutInflater)
         shimmerViewPager = binding.shimmerViewPager
         shimmerViewCategory = binding.shimmerViewContainer
 
         viewModel.load("sport")
 
-
         val listener = object : NewsListener {
             override fun onListClick(bundle: Article) {
 
-                val action = HomeFragmentDirections.actionHomeFragmentToOverviewFragment(
-                    bundle.title ?: "unknown",
-                    bundle.urlToImage ?: "unknown",
-                    bundle.url ?: "unknown",
-                    UtilsMethods.convertDate(bundle.publishedAt).toString() ?: "unknown",
-                    bundle.content ?: "unknown",
-                    bundle.author ?: "unknown"
-                )
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToOverviewFragment(
+                        bundle.title ?: "unknown",
+                        bundle.urlToImage ?: "unknown",
+                        bundle.url ?: "unknown",
+                        UtilsMethods.convertDate(bundle.publishedAt).toString() ?: "unknown",
+                        bundle.content ?: "unknown",
+                        bundle.author ?: "unknown"
+                    )
                 findNavController().navigate(action)
             }
 
         }
-
-        binding.toolbar.menu.findItem(R.id.menu_search).setOnMenuItemClickListener(this)
 
         adapterCategory.attachListener(listener)
 
@@ -124,14 +126,6 @@ class HomeFragment : Fragment(), MenuItem.OnMenuItemClickListener {
         })
     }
 
-    override fun onMenuItemClick(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_search){
-            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
-
-            findNavController().navigate(action)
-        }
-        return true
-    }
 
     private fun observer(listener: NewsListener) {
         viewModel.trendingNews.observe(viewLifecycleOwner, Observer {
